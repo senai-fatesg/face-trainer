@@ -1,0 +1,133 @@
+<!DOCTYPE html >
+<html lang="pt.Br" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a="http://www.ambientinformatica.com.br/jsf2"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Faces Trainer</title>
+
+	<link href="css/styles.css" rel="stylesheet" />
+	<link href="resources/bootstrap/css/bootstrap.css" rel="stylesheet" />
+
+	<script src="resources/bootstrap/js/bootstrap.js"></script>
+	<script src="resources/bootstrap/js/bootstrap.min.js"></script>
+
+
+	<link rel="shortcut icon" href="resources/img/favicon.ico"
+		type="image/x-icon" />
+
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="Cache-Control"
+		content="no-cache, no-store, must-revalidate" />
+	<meta http-equiv="Pragma" content="no-cache" />
+	<meta http-equiv="Expires" content="0" />
+
+
+</h:head>
+
+<body>
+	<div class="header">
+		<div class="container">
+			<div class="row branding">
+				<div class="span6">
+					<h1 class="pull-left">
+						<a id="menutopo" href="index.xhtml"><strong>Faces Trainer</strong></a>
+					</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<p:messages id="messages" showDetail="true" closable="true">
+		<p:autoUpdate />
+	</p:messages>
+
+
+
+	<div class="container content">
+		
+			<h:form class="form-horizontal" id="form_cadastro">
+				
+			<div class="form-horizontal col-md-6 ">
+				
+				
+				<h2>Novo Cadastro:</h2>
+				<hr />
+
+				<div class="form-group">
+
+					<label for="nome1">Nome <span style="color: red;">*</span></label>
+					<p:inputText value="#{CobaiaControl.cobaia.nome}"
+						class="form-control" id="nome1" placeholder="Nome">
+					</p:inputText>
+				</div>
+
+				<div class="form-group">
+
+					<label for="nome2">Sobrenome <span style="color: red;">*</span></label>
+					<p:inputText value="#{CobaiaControl.cobaia.sobreNome}"
+						class="form-control" id="nome2" placeholder="Sobrenome">
+					</p:inputText>
+				</div>
+
+				<div class="form-group">
+
+					<label for="email">Email <span style="color: red;">*</span></label>
+					<p:inputText value="#{CobaiaControl.cobaia.email}" type="email"
+						class="form-control" id="email" placeholder="Email">
+					</p:inputText>
+				</div>
+
+
+				<p:commandButton  class="btn btn-default" value="Cadastrar"  actionListener="#{CobaiaControl.confirmar}" update="@all" />
+					
+
+				<hr />
+				</div>
+				
+				
+								
+				<div class="form-horizontal  col-md-6 ">
+				
+				<h:panelGrid cellpadding="10" columns="2"  rendered="#{CobaiaControl.cobaia.nome ne null}" id="panel_foto" style="margin-top:100px; margin-left:25px">
+					
+					<p:photoCam widgetVar="pc" listener="#{CobaiaControl.oncapture}" update="photo butons" />
+
+					<p:outputPanel id="photo" style="margin-left:15px">
+						<p:graphicImage
+							name="/fotos/treinamento/#{CobaiaControl.filename}.jpeg"
+							rendered="#{not empty CobaiaControl.filename}" />
+
+					</p:outputPanel>
+
+				
+				<hr />
+				
+				</h:panelGrid>
+				
+				<h:panelGrid cellpadding="10" columns="3" rendered="#{CobaiaControl.cobaia.nome ne null}" id="butons" style="margin-left:25px">
+				
+				
+				<p:commandButton class="btn btn-default btn-lg ui-btn-alternative" type="button" value="Capturar" onclick="PF('pc').capture()" 
+									style=" margin-top:15px; width: 150px; height: 70px;" /> 
+					
+				
+				
+				<p:commandLink class="btn btn-danger btn-lg " type="button" value="Finalizar" update="@all" actionListener="#{CobaiaControl.finalizar}"
+								 disabled="#{!CobaiaControl.isBtnFinalizarAtivo }" style=" margin-top:15px; margin-left:15px; width: 150px; height: 70px; background:red;" />
+
+			
+				</h:panelGrid>
+			
+			
+				
+			    </div>
+
+		
+			</h:form>
+
+	</div>
+
+</body>
+</html>
